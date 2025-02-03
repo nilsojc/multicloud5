@@ -1,0 +1,17 @@
+{
+    "name": "AWS Dev Environment",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu", // Use a base image
+    "postCreateCommand": "bash .devcontainer/setup.sh", // Run a script to install AWS CLI
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "AmazonWebServices.aws-toolkit-vscode", // AWS Toolkit Extension
+          "ms-vscode-remote.remote-containers"
+        ]
+      }
+    },
+    "features": {
+      "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+      "ghcr.io/devcontainers/features/python:1": {}
+    }
+  }
