@@ -29,7 +29,23 @@ In this project, I
 
 In this step, we will be setting up BigQuery with Google Cloud to create a data table and a query.
 
-We will begin by 
+We will begin by creating a new project in the console:
+
+![image](/assets/images1.png)
+
+Then, we will go on the dashboard and go to "API and Services"
+
+![image](/assets/images2.png)
+![image](/assets/images4.png)
+
+Next, we will make sure that Big Query API is enabled
+
+![image](/assets/image5.png)
+
+Then, we will go in the console and and search "BigQuery", where we will create a new dataset with the name 'cloudmart'
+
+![image](/assets/image7.png)
+![image](/assets/image8.png)
 
 
 
@@ -268,7 +284,7 @@ Lastly, deploy changes in kubernetes:
 ```
 kubectl apply -f cloudmart-backend.yaml
 ```
-![image](/assets/image5.png)
+
 
 <h2>Conclusion</h2>
 
