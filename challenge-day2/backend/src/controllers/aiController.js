@@ -62,3 +62,19 @@ export const sendBedrockMessageController = async (req, res) => {
       .json({ error: "Error processing message", details: error.message });
   }
 };
+
+export const analyzeSentimentAndSaveController = async (req, res) => {
+  try {
+    const { thread } = req.body;
+    if (!thread) {
+      return res.status(400).json({ error: "Thread data is required" });
+    }
+    const result = await aiService.analyzeSentimentAndSave(thread);
+    res.json(result);
+  } catch (error) {
+    console.error("Error analyzing sentiment and saving:", error);
+    res
+      .status(500)
+      .json({ error: "Error processing request", details: error.message });
+  }
+};

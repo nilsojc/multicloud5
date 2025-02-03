@@ -5,13 +5,20 @@ import {
 } from "@aws-sdk/client-bedrock-agent-runtime";
 import { Readable } from "stream";
 import pkg from "@smithy/eventstream-codec";
+import {
+  AzureKeyCredential,
+  TextAnalyticsClient,
+} from "@azure/ai-text-analytics";
+import awsSdk from "aws-sdk";
+import { v4 as uuidv4 } from "uuid";
 
 const { EventStreamCodec } = pkg;
+const { DynamoDB } = awsSdk;
+
 import dotenv from "dotenv";
 import { deleteOrder, getOrderById, cancelOrder } from "./orderService.js";
 
 dotenv.config();
-
 const bedrockAgentClient = new BedrockAgentRuntimeClient({
   region: "us-east-1",
 });
@@ -215,7 +222,86 @@ export const sendBedrockMessage = async (sessionId, message) => {
   }
 };
 
-export async function populateProductsTable() {
-  // Implementation to populate the DynamoDB table with sample data
-  // This would be similar to what was in the PopulateProductsTableFunction
-}
+const textAnalyticsClient = new TextAnalyticsClient(
+  process.env.AZURE_ENDPOINT,
+  new AzureKeyCredential(process.env.AZURE_API_KEY)
+);
+
+// Updated DynamoDB client
+const dynamoDbClient = new DynamoDB.DocumentClient({
+  region: process.env.AWS_REGION,
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+});
+
+// Updated analyzeSentimentAndSave function
+export const analyzeSentimentAndSave = async (thread) => {
+  try {
+    // Extract all user messages from the thread
+    const userMessages = thread.messages
+      .filter((message) => message.sender === "user")
+      .map((message) => message.text);
+
+    // Analyze sentiment
+    const results = await textAnalyticsClient.analyzeSentiment(userMessages);
+
+    // Calculate average sentiment
+    const sentimentScores = results.map((result) => result.confidenceScores);
+    const averageSentiment = {
+      positive:
+        sentimentScores.reduce((sum, score) => sum + score.positive, 0) /
+        sentimentScores.length,
+      neutral:
+        sentimentScores.reduce((sum, score) => sum + score.neutral, 0) /
+        sentimentScores.length,
+      negative:
+        sentimentScores.reduce((sum, score) => sum + score.negative, 0) /
+        sentimentScores.length,
+    };
+
+    // Determine overall sentiment
+    let overallSentiment;
+    if (
+      averageSentiment.positive > averageSentiment.neutral &&
+      averageSentiment.positive > averageSentiment.negative
+    ) {
+      overallSentiment = "positive";
+    } else if (
+      averageSentiment.negative > averageSentiment.neutral &&
+      averageSentiment.negative > averageSentiment.positive
+    ) {
+      overallSentiment = "negative";
+    } else {
+      overallSentiment = "neutral";
+    }
+
+    // Prepare item for DynamoDB
+    const item = {
+      id: uuidv4().split("-")[0],
+      threadId: thread.id,
+      threadName: thread.name,
+      status: "closed",
+      conversation: JSON.stringify(thread.messages),
+      sentimentScores: averageSentiment,
+      overallSentiment: overallSentiment,
+      createdAt: new Date().toISOString(),
+    };
+
+    // Save to DynamoDB
+    await dynamoDbClient
+      .put({
+        TableName: "cloudmart-tickets",
+        Item: item,
+      })
+      .promise();
+
+    return {
+      threadId: thread.id,
+      sentimentScores: averageSentiment,
+      overallSentiment: overallSentiment,
+    };
+  } catch (error) {
+    console.error("Error in analyzeSentimentAndSave:", error);
+    throw error;
+  }
+};

@@ -4,6 +4,7 @@ import cors from "cors";
 import productRoutes from "./routes/productRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import aiRoutes from "./routes/aiRoutes.js";
+import ticketRoutes from "./routes/ticketRoutes.js";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -18,7 +19,7 @@ app.use(express.json());
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/ai", aiRoutes);
-
+app.use("/api/tickets", ticketRoutes);
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

@@ -5,6 +5,7 @@ import {
   sendOpenAIMessageController,
   startBedrockConversationController,
   sendBedrockMessageController,
+  analyzeSentimentAndSaveController,
 } from "../controllers/aiController.js";
 
 const router = express.Router();
@@ -16,5 +17,8 @@ router.post("/message", sendOpenAIMessageController);
 // Bedrock routes
 router.post("/bedrock/start", startBedrockConversationController);
 router.post("/bedrock/message", sendBedrockMessageController);
+
+// Azure routes
+router.post("/analyze-sentiment", analyzeSentimentAndSaveController);
 
 export default router;
