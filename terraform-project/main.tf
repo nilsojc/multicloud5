@@ -129,7 +129,7 @@ resource "aws_lambda_function" "dynamodb_to_bigquery" {
 
   environment {
     variables = {
-      GOOGLE_CLOUD_PROJECT_ID        = "lustrous-bounty-436219-f1"
+      GOOGLE_CLOUD_PROJECT_ID        = "switchnut88-349602"
       BIGQUERY_DATASET_ID            = "cloudmart"
       BIGQUERY_TABLE_ID              = "cloudmart-orders"
       GOOGLE_APPLICATION_CREDENTIALS = "/var/task/google_credentials.json"

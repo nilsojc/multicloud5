@@ -239,8 +239,19 @@ resource "aws_lambda_event_source_mapping" "dynamodb_stream" {
 Replace variable GOOGLE_CLOUD_PROJECT_ID with the project ID generated from the query. 
 
 
-***3. Set up Azure ***
+***3. Set up Azure Text Analytics ***
 
+In this step, we will log in to Azure to create a text analytics resource to be used in the function.
+
+![image](/assets/image16.png
+![image](/assets/image17.png)
+![image](/assets/image18.png)
+
+And finally, we will configure the resource as well as setting up the endpoint.
+
+![image](/assets/image19.png)
+![image](/assets/image20.png)
+![image](/assets/image21.png)
 
 ***4. Deploy Cloudmart backend and update Kubernetes - Final Result***
 
