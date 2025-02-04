@@ -36,6 +36,7 @@ We will begin by creating a new project in the console:
 Then, we will go on the dashboard and go to "API and Services"
 
 ![image](/assets/images2.png)
+
 ![image](/assets/images4.png)
 
 Next, we will make sure that Big Query API is enabled
@@ -45,6 +46,7 @@ Next, we will make sure that Big Query API is enabled
 Then, we will go in the console and and search "BigQuery", where we will create a new dataset with the name 'cloudmart'
 
 ![image](/assets/image7.png)
+
 ![image](/assets/image8.png)
 
 Then, we will create a BigQuery table:
@@ -58,6 +60,7 @@ We will be defining the schema for the table as it follows
 Then, go to 'Service Accounts' And click 'Create Service Account' 
 
 ![image](/assets/image11.png)
+
 ![image](/assets/image12.png)
 
 Next, we name it "cloudmart-bigquery-sa" and grant it the "BigQuery Data Editor" role.
@@ -67,6 +70,7 @@ Next, we name it "cloudmart-bigquery-sa" and grant it the "BigQuery Data Editor"
 After creating, we will add a new key and choose JSON as the key type with the name `google_credentials.json`
 
 ![image](/assets/image14.png)
+
 ![image](/assets/image15.png)
 
 Finally, we will point to our backend files to configure lambda, install the `npm` dependency needed for node.js, and edit the files on the lambda directory with the key generated:
@@ -243,14 +247,18 @@ Replace variable GOOGLE_CLOUD_PROJECT_ID with the project ID generated from the 
 
 In this step, we will log in to Azure to create a text analytics resource to be used in the function.
 
-![image](/assets/image16.png
+![image](/assets/image16.png)
+
 ![image](/assets/image17.png)
+
 ![image](/assets/image18.png)
 
 And finally, we will configure the resource as well as setting up the endpoint.
 
 ![image](/assets/image19.png)
+
 ![image](/assets/image20.png)
+
 ![image](/assets/image21.png)
 
 ***4. Deploy Cloudmart backend and update Kubernetes - Final Result***
