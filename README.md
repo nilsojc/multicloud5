@@ -69,6 +69,19 @@ After creating, we will add a new key and choose JSON as the key type with the n
 ![image](/assets/image14.png)
 ![image](/assets/image15.png)
 
+Finally, we will point to our backend files to configure lambda, install the `npm` dependency needed for node.js, and edit the files on the lambda directory with the key generated:
+
+```
+cd challenge-day2/backend/src/lambda/addToBigQuery
+
+sudo yum install npm
+npm install
+
+
+zip -r dynamodb_to_bigquery.zip .
+```
+
+
 ***2.  Creating Resources using Terraform***
 
 Before creating the resources with Terraform make sure it's set up and/or installed in your machine of choice.
