@@ -47,7 +47,27 @@ Then, we will go in the console and and search "BigQuery", where we will create 
 ![image](/assets/image7.png)
 ![image](/assets/image8.png)
 
+Then, we will create a BigQuery table:
 
+![image](/assets/image9.png)
+
+We will be defining the schema for the table as it follows
+
+![image](/assets/image10.png)
+
+Then, go to 'Service Accounts' And click 'Create Service Account' 
+
+![image](/assets/image11.png)
+![image](/assets/image12.png)
+
+Next, we name it "cloudmart-bigquery-sa" and grant it the "BigQuery Data Editor" role.
+
+![image](/assets/image13.png)
+
+After creating, we will add a new key and choose JSON as the key type with the name `google_credentials.json`
+
+![image](/assets/image14.png)
+![image](/assets/image15.png)
 
 ***2.  Creating Resources using Terraform***
 
