@@ -2,7 +2,7 @@
   <img src="assets/diagram.png" 
 </p>
   
-## ☁️ MultiCloud, DevOps & AI Challenge — Day 5 —  ☁️
+## ☁️ MultiCloud, DevOps & AI Challenge — Day 5 — Implementing analytics integration and deploying E-commerce Cloudmart to Production ☁️
 
 This is part of the final project of the Multicloud, Devops and AI Challenge!
 
