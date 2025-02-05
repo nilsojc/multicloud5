@@ -6,22 +6,26 @@
 
 This is part of the final project of the Multicloud, Devops and AI Challenge!
 
-In this project, I 
+In this project I focused on implementing analytics integrations and deploying CloudMart to production through seamless update and usage of Multicloud (AWS, Google Cloud and Azure). The process encompassed code updates, analytics configuration, and deployment automation.
+
+
 
 
 <h2>Environments and Technologies Used</h2>
 
   - Google Cloud
   - Microsoft Azure
+  - Amazon Web Services (AWS)
   - Terraform 
-  - 
+  - Elastic Container Registry
+  - Amazon Lambda
   
   
 <h2>Key Features</h2>  
 
-✅ 
-✅ 
-✅ 
+✅ Integrated the latest frontend and backend updates, incorporating testing feedback and feature enhancements to optimize functionality and user experience.
+✅ Backend services were containerized and published to ECR and Kubernetes configurations were updated with new deployments.
+✅ Implemented analytics integrations and deploying E-commerce CloudMart to production.
 
 <h2>Step by Step Instructions</h2>
 
@@ -242,6 +246,7 @@ resource "aws_lambda_event_source_mapping" "dynamodb_stream" {
 
 Replace variable GOOGLE_CLOUD_PROJECT_ID with the project ID generated from the query. 
 
+NOTE: Make sure the file list_products.zip is also within the terraform deployment, as well as making sure that the zip file that we created is pointing to your repository.
 
 ***3. Set up Azure Text Analytics ***
 
@@ -321,6 +326,8 @@ spec:
       port: 5000
       targetPort: 5000
 ```
+
+Make sure to replace the `XXX` values accordingly with your keys.
 
 Then, build a new image:
 
