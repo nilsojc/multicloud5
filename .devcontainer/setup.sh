@@ -62,4 +62,4 @@ sudo apt update && sudo apt install terraform
 sudo apt update
 sudo apt install default-jre -y
 
-#  wget https://repo1.maven.org/maven2/com/madgag/bfg/1.14.0/bfg-1.14.0.jar -O bfg.jar  and  java -jar bfg.jar --strip-blobs-bigger-than 100M  are the commands to run 
+#  wget https://repo1.maven.org/maven2/com/madgag/bfg/1.14.0/bfg-1.14.0.jar -O bfg.jar  and  java -jar bfg.jar --strip-blobs-bigger-than 100M then  > git reflog expire are the commands to run 
